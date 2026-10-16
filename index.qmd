@@ -1,0 +1,276 @@
+---
+title: "Jarl, a new R linter"
+
+format:
+ revealjs:
+   incremental: false
+   theme: [serif, custom.scss]
+   pdf-separate-fragments: true
+   strip-comments: true
+   highlight-style: github
+   auto-animate-duration: 0.8
+   code-copy: true
+   slide-number: true
+
+execute:
+  eval: true
+  echo: true
+---
+
+## A linter?
+
+<br>
+
+Find code that is not optimal, likely wrong, hard to read, etc.
+
+. . .
+
+<br>
+
+So far in R: **`lintr`**
+
+- 117 rules (formatting + linting), e.g. `any(is.na(x))` -> `anyNA(x)` 
+- reports lints, does not fix them
+- can be slow
+- requires an R setup
+
+##
+
+<br><br>
+
+{{< fa arrow-right >}} &nbsp; **`Jarl`**
+
+- ~ 40 rules (linting only)
+- fast (uses Air infrastructure)
+- automatic fixes when possible
+- single binary to run
+
+<br>
+
+Full docs: [jarl.etiennebacher.com](https://jarl.etiennebacher.com/)
+
+## Plan
+
+<br><br>
+
+1. How to use
+
+<br><br>
+
+2. How to configure
+
+<br><br>
+
+3. How to extend
+
+# 1. How to use
+
+## 1. How to use
+
+<br>
+
+Three options:
+
+- in terminal:
+
+```sh
+# Run linter on current directory
+jarl check .
+
+# Run linter and apply automatic fixes
+jarl check . --fix
+```
+
+. . .
+
+- with extensions (Positron, Zed, VS Code, Neovim, Helix): code highlighting and code-actions
+
+. . .
+
+- in CI: Github actions workflow [setup-jarl](https://github.com/etiennebacher/setup-jarl)
+
+## 1. How to use
+
+<img src="./screenshot_ci.png" width="700" height="200">
+
+:::{#yaml-ci}
+```yaml
+# Workflow derived from https://github.com/posit-dev/setup-air/tree/main/examples
+
+on:
+  push:
+    branches: main
+  pull_request:
+
+name: Lint
+
+permissions: read-all
+
+jobs:
+  jarl-check:
+    name: jarl-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: etiennebacher/setup-jarl@v0.1.0
+```
+:::
+
+# 2. How to configure
+
+## 2. How to configure
+
+<br>
+
+**With CLI arguments** (temporary)
+<br>
+<br>
+
+```sh
+# Use the rules "any_is_na" and "any_duplicated" only
+jarl check . --select any_is_na,any_duplicated
+
+# Use all default rules + testthat rules except "expect_named"
+jarl check . --extend-select TESTTHAT --ignore expect_named
+
+# Get a more concise version of rule violations
+jarl check . --output-format concise
+
+# All commands
+jarl check --help
+```
+
+## 2. How to configure
+<br>
+
+**With `jarl.toml`** (permanent)
+<br>
+<br>
+
+Most CLI args have an equivalent in `jarl.toml`:
+<br>
+
+```{.toml filename="jarl.toml"}
+[lint]
+extend-select = ["TESTTHAT"]
+ignore = ["implicit_assignment", "numeric_leading_zero"]
+assignment = "="
+```
+
+. . .
+
+<br>
+
+Some arguments are identical to `air.toml`, e.g. `default-exclude`.
+
+<br>
+
+CLI arguments always override `jarl.toml` arguments.
+
+
+# 3. How to extend
+
+## 3. How to extend
+
+<br>
+
+Requirements to add rules:
+
+- need knowledge of Rust
+
+- need basic knowledge of `tree-sitter` Abstract Syntax Tree (AST)
+
+- no plugin mechanism, changes must be integrated in Jarl directly.
+
+. . .
+
+<br>
+
+:::{.callout-note #note-rust appearance="simple"}
+I'm not a Rust expert, other code improvements are also welcome!
+:::
+
+. . .
+
+<br>
+
+Main limitations (for now):
+
+1. No code flow analysis
+
+2. No access to the R environment
+
+## 3. How to extend
+
+<br>
+
+1. No code flow analysis
+
+<br>
+
+Jarl can only do pattern detection.
+
+. . .
+
+For example, detecting unreachable code is not possible:
+
+```r
+foo <- function(x) {
+    if (x > 10) {
+        return("hi")
+    } else {
+        return("bye")
+    }
+    x + 1 # unreachable
+}
+```
+
+## 3. How to extend
+
+<br>
+
+2. No access to the R environment
+
+<br>
+
+* Don't know from which package the function comes.
+
+. . .
+
+* Sometimes okay, e.g. `testthat`:
+
+    - quite distinct prefix (`expect_`)
+    - partially overlapping namespace with `tinytest` but we don't use both at the same time
+
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{< fa arrow-right >}} &nbsp; can let the user opt in the rule group `TESTTHAT`
+
+. . .
+
+* Some packages have more generic function names and could be more problematic.
+
+
+## Some resources
+
+<br>
+
+Some `testthat` rules to implement:
+
+[https://github.com/etiennebacher/jarl/issues/214](https://github.com/etiennebacher/jarl/issues/214){target="_blank"}
+
+<br>
+
+Tutorial on contributing a rule:
+
+[https://jarl.etiennebacher.com/contributing-rule-example](https://jarl.etiennebacher.com/contributing-rule-example){target="_blank"}
+
+<br>
+
+Example PR:
+
+[https://github.com/etiennebacher/jarl/pull/225](https://github.com/etiennebacher/jarl/pull/225){target="_blank"}
+
+<br>
+
+Full docs:
+
+[https://jarl.etiennebacher.com/](https://jarl.etiennebacher.com/){target="_blank"}

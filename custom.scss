@@ -1,0 +1,102 @@
+/*-- scss:defaults --*/
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400');
+
+$body-color: black;
+$link-color: #cc0052;
+
+$font-family-sans-serif: "Mulish" !default;
+$presentation-heading-font: "Mulish" !default;
+
+$presentation-heading-letter-spacing: 0.1rem;
+$presentation-heading-font-weight: 400;
+$presentation-h1-font-size: 3rem;
+$presentation-font-size-root: 30px;
+$code-block-font-size: 0.8em;
+
+/*-- scss:rules --*/
+
+.reveal h1.title {
+  font-size: 2em;
+}
+
+.reveal .slides section .callout {
+	font-size: 0.9em;
+}
+
+.reveal h1 {
+  margin-bottom: 10%;
+}
+
+.reveal h2 {
+	font-size: 1.3em;
+	border-bottom: .2rem solid #000;
+	text-align: center;
+	padding-bottom: 1rem;
+}
+
+.reveal .slides li {
+  margin-left: 1em;
+}
+
+.reveal .slides .subtitle {
+  color: $presentation-heading-color;
+  font-size: $presentation-h3-font-size;
+}
+
+.reveal p > a {
+  border-bottom: 1px dashed;
+}
+
+.reveal a > code  {
+  color: $link-color;
+  border-bottom: 1px dashed;
+}
+
+.reveal code, .reveal a > code {
+	font-size: 1em !important;
+}
+
+.reveal .cell-output > pre {
+	background-color: #232525;
+	color: black;
+	border: 1px black solid;
+	border-radius: 0.25rem;
+	margin-top: 0.5rem;
+}
+
+.reveal div.sourceCode {
+	overflow: hidden !important;
+}
+
+.highlight-line {
+	background: #d9d9d9;
+	width: 100%;
+}
+
+.highlight-line > span.co {
+  color: black;
+}
+
+.reveal ol, .reveal dl, .reveal ul {
+	display: block;
+}
+
+.reveal code, .reveal a > code {
+  font-size: 0.85em;
+}
+
+#yaml-ci > div > div > pre {
+	max-height: 400px !important;
+	overflow-y: scroll;
+}
+
+#yaml-ci > div > div > pre > code {
+	overflow: hidden;
+	font-size: 75% !important;
+}
+
+#note-rust {
+	font-size: 1.75rem;
+}
