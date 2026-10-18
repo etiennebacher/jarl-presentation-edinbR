@@ -6,9 +6,7 @@
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-67e1af7abdb15bd5a2919d83736f6706.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<link href="index_files/libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
-<link href="index_files/libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-93d1fc2728cb29a625c739abeb3d66e8.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.9.27">
 
   <title>Jarl, a new R linter</title>
@@ -63,43 +61,43 @@
       }
     pre.numberSource { margin-left: 3em;  padding-left: 4px; }
     div.sourceCode
-      { color: #24292e;  }
+      { color: #383a42;  }
     @media screen {
     pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
     }
-    code span { color: #24292e; } /* Normal */
-    code span.al { color: #ff5555; font-weight: bold; } /* Alert */
-    code span.an { color: #6a737d; } /* Annotation */
-    code span.at { color: #d73a49; } /* Attribute */
-    code span.bn { color: #005cc5; } /* BaseN */
-    code span.bu { color: #d73a49; } /* BuiltIn */
-    code span.cf { color: #d73a49; } /* ControlFlow */
-    code span.ch { color: #032f62; } /* Char */
-    code span.cn { color: #005cc5; } /* Constant */
-    code span.co { color: #6a737d; } /* Comment */
-    code span.cv { color: #6a737d; } /* CommentVar */
-    code span.do { color: #6a737d; } /* Documentation */
-    code span.dt { color: #d73a49; } /* DataType */
-    code span.dv { color: #005cc5; } /* DecVal */
-    code span.er { color: #ff5555; text-decoration: underline; } /* Error */
-    code span.ex { color: #d73a49; font-weight: bold; } /* Extension */
-    code span.fl { color: #005cc5; } /* Float */
-    code span.fu { color: #6f42c1; } /* Function */
-    code span.im { color: #032f62; } /* Import */
-    code span.in { color: #6a737d; } /* Information */
-    code span.kw { color: #d73a49; } /* Keyword */
-    code span.op { color: #24292e; } /* Operator */
-    code span.ot { color: #6f42c1; } /* Other */
-    code span.pp { color: #d73a49; } /* Preprocessor */
-    code span.re { color: #6a737d; } /* RegionMarker */
-    code span.sc { color: #005cc5; } /* SpecialChar */
-    code span.ss { color: #032f62; } /* SpecialString */
-    code span.st { color: #032f62; } /* String */
-    code span.va { color: #e36209; } /* Variable */
-    code span.vs { color: #032f62; } /* VerbatimString */
-    code span.wa { color: #ff5555; } /* Warning */
+    code span { color: #383a42; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #50a14f; } /* Annotation */
+    code span.at { color: #a626a4; } /* Attribute */
+    code span.bn { color: #986801; } /* BaseN */
+    code span.bu { color: #a626a4; } /* BuiltIn */
+    code span.cf { color: #a626a4; } /* ControlFlow */
+    code span.ch { color: #50a14f; } /* Char */
+    code span.cn { color: #986801; } /* Constant */
+    code span.co { color: #a0a1a7; font-style: italic; } /* Comment */
+    code span.cv { color: #e45649; font-style: italic; } /* CommentVar */
+    code span.do { color: #e45649; } /* Documentation */
+    code span.dt { color: #a626a4; } /* DataType */
+    code span.dv { color: #986801; } /* DecVal */
+    code span.er { color: #f44747; text-decoration: underline; } /* Error */
+    code span.ex { color: #4078f2; font-weight: bold; } /* Extension */
+    code span.fl { color: #986801; } /* Float */
+    code span.fu { color: #4078f2; } /* Function */
+    code span.im { color: #50a14f; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #a626a4; } /* Keyword */
+    code span.op { color: #a626a4; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #a626a4; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #0184bc; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #50a14f; } /* String */
+    code span.va { color: #e45649; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
   </style>
-  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-2d2e1822fc840acc2c5cba6e705ae7f8.css">
+  <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto-3e81e46b0b2bf91286fe39c5a5be58e0.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="index_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -205,45 +203,98 @@
 </section>
 <section id="a-linter" class="slide level2">
 <h2>A linter?</h2>
-<p><br></p>
-<p>Find code that is not optimal, likely wrong, hard to read, etc.</p>
+<aside class="notes">
+<p>Show of hands: who here:</p>
+<ul>
+<li><p>knows what a linter is?</p></li>
+<li><p>regularly uses a linter?</p></li>
+<li><p>has ever used a linter in R?</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="fragment">
+<p><br></p>
+<p>Tool to find code that is not optimal, likely wrong, hard to read, etc. by performing <strong>static analysis</strong>.</p>
+<p><br></p>
+</div>
+<div class="fragment">
+<p>Most languages have at least one linter.</p>
+<p><br></p>
+</div>
+<div class="fragment">
+<p>A linter is <strong>opinionated</strong>.</p>
+</div>
+</section>
+<section id="what-do-you-mean-opinionated" class="slide level2">
+<h2>What do you mean <em>opinionated</em>?</h2>
+<p><br></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>x <span class="ot">=</span> y <span class="sc">*</span> .<span class="dv">52</span></span>
+<span id="cb1-2"><a href=""></a><span class="cf">if</span> (<span class="fu">all.equal</span>(x, z)) {</span>
+<span id="cb1-3"><a href=""></a>  <span class="fu">print</span>(<span class="st">"x and z are equal"</span>)</span>
+<span id="cb1-4"><a href=""></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p>All possible violations:</p>
+<ol type="1">
+<li><p><code>x = y * .52</code></p>
+<ol type="a">
+<li><p><strong>not important</strong>: use <code>&lt;-</code> instead of <code>=</code></p></li>
+<li><p><strong>not important</strong>: use <code>0.52</code> instead of <code>.52</code></p></li>
+</ol></li>
+<li><p><strong>important</strong>: <code>all.equal(x, z)</code> doesn’t return <code>FALSE</code> if <code>x != z</code></p></li>
+</ol>
+</div>
+</section>
+<section id="current-status" class="slide level2">
+<h2>Current status</h2>
 <p><br></p>
 <p>So far in R: <strong><code>lintr</code></strong></p>
 <ul>
+<li>pioneer for linting in R</li>
 <li>117 rules (formatting + linting), e.g.&nbsp;<code>any(is.na(x))</code> -&gt; <code>anyNA(x)</code></li>
+</ul>
+<div class="fragment">
+<p><strong>But</strong>:</p>
+<ul>
 <li>reports lints, does not fix them</li>
 <li>can be slow</li>
 <li>requires an R setup</li>
 </ul>
 </div>
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
-<p><br><br></p>
-<p><i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> &nbsp; <strong><code>Jarl</code></strong></p>
+<section id="introducing-jarl" class="slide level2">
+<h2>Introducing Jarl</h2>
+<p><br></p>
 <ul>
-<li>~ 40 rules (linting only)</li>
-<li>fast (uses Air infrastructure)</li>
+<li>Released in November 2025</li>
+<li>~ 85 rules (linting only)</li>
+<li>fast (written in Rust)</li>
 <li>automatic fixes when possible</li>
 <li>single binary to run</li>
+<li>editor integration</li>
 </ul>
-<p><br></p>
-<p>Full docs: <a href="https://jarl.etiennebacher.com/">jarl.etiennebacher.com</a></p>
 </section>
 <section id="plan" class="slide level2">
 <h2>Plan</h2>
-<p><br><br></p>
+<p><br></p>
 <ol type="1">
 <li>How to use</li>
 </ol>
-<p><br><br></p>
+<p><br></p>
 <ol start="2" type="1">
 <li>How to configure</li>
 </ol>
-<p><br><br></p>
+<p><br></p>
 <ol start="3" type="1">
-<li>How to extend</li>
+<li>How to contribute</li>
 </ol>
 </section>
 <section>
@@ -254,48 +305,90 @@
 <section id="how-to-use-1" class="slide level2">
 <h2>1. How to use</h2>
 <p><br></p>
-<p>Three options:</p>
-<ul>
-<li>in terminal:</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href=""></a><span class="co"># Run linter on current directory</span></span>
-<span id="cb1-2"><a href=""></a><span class="ex">jarl</span> check .</span>
-<span id="cb1-3"><a href=""></a></span>
-<span id="cb1-4"><a href=""></a><span class="co"># Run linter and apply automatic fixes</span></span>
-<span id="cb1-5"><a href=""></a><span class="ex">jarl</span> check . <span class="at">--fix</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Three ways to use Jarl:</p>
+<ol type="1">
+<li>in terminal</li>
+<li>with extensions in your editor</li>
+<li>in CI</li>
+</ol>
+</section>
+<section id="how-to-use-in-terminal" class="slide level2">
+<h2>1. How to use in terminal</h2>
+<p><br> Basic usage:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="co"># Run linter on current directory</span></span>
+<span id="cb2-2"><a href=""></a><span class="ex">jarl</span> check .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><br></p>
 <div class="fragment">
-<ul>
-<li>with extensions (Positron, Zed, VS Code, Neovim, Helix): code highlighting and code-actions</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>in CI: Github actions workflow <a href="https://github.com/etiennebacher/setup-jarl">setup-jarl</a></li>
-</ul>
+<p>Recommended usage: run this first</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="ex">jarl</span> check . <span class="at">--statistics</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>and then proceed rule by rule (and possibly tweak the configuration).</p>
 </div>
 </section>
-<section id="how-to-use-2" class="slide level2">
-<h2>1. How to use</h2>
-<p><img src="./screenshot_ci.png" width="700" height="200"></p>
-<div id="yaml-ci">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource yaml number-lines code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href=""></a><span class="co"># Workflow derived from https://github.com/posit-dev/setup-air/tree/main/examples</span></span>
-<span id="cb2-2"><a href=""></a></span>
-<span id="cb2-3"><a href=""></a><span class="fu">on</span><span class="kw">:</span></span>
-<span id="cb2-4"><a href=""></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
-<span id="cb2-5"><a href=""></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> main</span></span>
-<span id="cb2-6"><a href=""></a><span class="at">  </span><span class="fu">pull_request</span><span class="kw">:</span></span>
-<span id="cb2-7"><a href=""></a></span>
-<span id="cb2-8"><a href=""></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Lint</span></span>
-<span id="cb2-9"><a href=""></a></span>
-<span id="cb2-10"><a href=""></a><span class="fu">permissions</span><span class="kw">:</span><span class="at"> read-all</span></span>
-<span id="cb2-11"><a href=""></a></span>
-<span id="cb2-12"><a href=""></a><span class="fu">jobs</span><span class="kw">:</span></span>
-<span id="cb2-13"><a href=""></a><span class="at">  </span><span class="fu">jarl-check</span><span class="kw">:</span></span>
-<span id="cb2-14"><a href=""></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> jarl-check</span></span>
-<span id="cb2-15"><a href=""></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
-<span id="cb2-16"><a href=""></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
-<span id="cb2-17"><a href=""></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
-<span id="cb2-18"><a href=""></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> etiennebacher/setup-jarl@v0.1.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="how-to-use-in-terminal-1" class="slide level2">
+<h2>1. How to use in terminal</h2>
+<p><br></p>
+<p>Rules can come with safe fixes, unsafe fixes, or no fixes at all:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="co"># Apply safe fixes only</span></span>
+<span id="cb4-2"><a href=""></a><span class="ex">jarl</span> check . <span class="at">--fix</span></span>
+<span id="cb4-3"><a href=""></a></span>
+<span id="cb4-4"><a href=""></a><span class="co"># Apply safe and unsafe fixes</span></span>
+<span id="cb4-5"><a href=""></a><span class="ex">jarl</span> check . <span class="at">--fix</span> <span class="at">--unsafe-fixes</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>By default, fixes are not applied if:</p>
+<ol type="1">
+<li>the project doesn’t use version control</li>
+<li>or the version control status is “dirty” (some files are unstaged)</li>
+</ol>
+<p>Use <code>--allow-no-vcs</code> and <code>--allow-dirty</code> carefully!</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="how-to-use-with-extensions" class="slide level2">
+<h2>1. How to use with extensions</h2>
+<p><br> <br></p>
+<p>Install the “Jarl” extension in your editor (Positron, Zed, VS Code, Neovim, Helix, etc.). <strong>RStudio integration is not possible.</strong></p>
+<p><br></p>
+<p>Using the extension enables code highlighting and code actions.</p>
+</section>
+<section id="how-to-use-in-ci" class="slide level2">
+<h2>1. How to use in CI</h2>
+<p><br></p>
+<p>Use the GitHub actions workflow: <a href="https://github.com/etiennebacher/setup-jarl">setup-jarl</a></p>
+<p><img src="./screenshot_ci.png" width="900" height="250"></p>
+</section>
+<section id="silencing-jarl" class="slide level2">
+<h2>Silencing Jarl</h2>
+<p><br></p>
+<div class="fragment">
+<p>For the occasional false positive, use <strong>suppression comments</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co"># jarl-ignore &lt;rule name&gt;: &lt;reason for skipping&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div style="height: 0.5em">
+
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="co"># jarl-ignore any_is_na: this is a demo</span></span>
+<span id="cb6-2"><a href=""></a><span class="fu">any</span>(<span class="fu">is.na</span>(x))</span>
+<span id="cb6-3"><a href=""></a></span>
+<span id="cb6-4"><a href=""></a><span class="co"># jarl-ignore-start any_is_na: this is a demo</span></span>
+<span id="cb6-5"><a href=""></a>...</span>
+<span id="cb6-6"><a href=""></a><span class="fu">any</span>(<span class="fu">is.na</span>(x))</span>
+<span id="cb6-7"><a href=""></a>...</span>
+<span id="cb6-8"><a href=""></a><span class="co"># jarl-ignore-end any_is_na</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<p>For more important changes to Jarl’s output, you will need to <strong>configure</strong> Jarl.</p>
 </div>
 </section></section>
 <section>
@@ -306,61 +399,67 @@
 <section id="how-to-configure-1" class="slide level2">
 <h2>2. How to configure</h2>
 <p><br></p>
-<p><strong>With CLI arguments</strong> (temporary) <br> <br></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="co"># Use the rules "any_is_na" and "any_duplicated" only</span></span>
-<span id="cb3-2"><a href=""></a><span class="ex">jarl</span> check . <span class="at">--select</span> any_is_na,any_duplicated</span>
-<span id="cb3-3"><a href=""></a></span>
-<span id="cb3-4"><a href=""></a><span class="co"># Use all default rules + testthat rules except "expect_named"</span></span>
-<span id="cb3-5"><a href=""></a><span class="ex">jarl</span> check . <span class="at">--extend-select</span> TESTTHAT <span class="at">--ignore</span> expect_named</span>
-<span id="cb3-6"><a href=""></a></span>
-<span id="cb3-7"><a href=""></a><span class="co"># Get a more concise version of rule violations</span></span>
-<span id="cb3-8"><a href=""></a><span class="ex">jarl</span> check . <span class="at">--output-format</span> concise</span>
-<span id="cb3-9"><a href=""></a></span>
-<span id="cb3-10"><a href=""></a><span class="co"># All commands</span></span>
-<span id="cb3-11"><a href=""></a><span class="ex">jarl</span> check <span class="at">--help</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>With CLI arguments</strong> (temporary) <br></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="co"># Use the rules "any_is_na" and "any_duplicated" only</span></span>
+<span id="cb7-2"><a href=""></a><span class="ex">jarl</span> check . <span class="at">--select</span> any_is_na,any_duplicated</span>
+<span id="cb7-3"><a href=""></a></span>
+<span id="cb7-4"><a href=""></a><span class="co"># Use all default rules + testthat rules except "expect_named"</span></span>
+<span id="cb7-5"><a href=""></a><span class="ex">jarl</span> check . <span class="at">--extend-select</span> TESTTHAT <span class="at">--ignore</span> expect_named</span>
+<span id="cb7-6"><a href=""></a></span>
+<span id="cb7-7"><a href=""></a><span class="co"># Get a more concise version of rule violations</span></span>
+<span id="cb7-8"><a href=""></a><span class="ex">jarl</span> check . <span class="at">--output-format</span> concise</span>
+<span id="cb7-9"><a href=""></a></span>
+<span id="cb7-10"><a href=""></a><span class="co"># All commands</span></span>
+<span id="cb7-11"><a href=""></a><span class="ex">jarl</span> check <span class="at">--help</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="how-to-configure-2" class="slide level2">
 <h2>2. How to configure</h2>
 <p><br></p>
-<p><strong>With <code>jarl.toml</code></strong> (permanent) <br> <br></p>
-<p>Most CLI args have an equivalent in <code>jarl.toml</code>: <br></p>
+<p><strong>With <code>jarl.toml</code></strong> (permanent) <br></p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>jarl.toml</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-filename="jarl.toml"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb4-1"><a href=""></a><span class="kw">[lint]</span></span>
-<span id="cb4-2"><a href=""></a><span class="dt">extend-select</span> <span class="op">=</span> <span class="op">[</span><span class="st">"TESTTHAT"</span><span class="op">]</span></span>
-<span id="cb4-3"><a href=""></a><span class="dt">ignore</span> <span class="op">=</span> <span class="op">[</span><span class="st">"implicit_assignment"</span><span class="op">,</span> <span class="st">"numeric_leading_zero"</span><span class="op">]</span></span>
-<span id="cb4-4"><a href=""></a><span class="dt">assignment</span> <span class="op">=</span> <span class="st">"="</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-filename="jarl.toml"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb8-1"><a href=""></a><span class="kw">[lint]</span></span>
+<span id="cb8-2"><a href=""></a></span>
+<span id="cb8-3"><a href=""></a><span class="co"># general options</span></span>
+<span id="cb8-4"><a href=""></a><span class="dt">extend-select</span> <span class="op">=</span> <span class="op">[</span><span class="st">"TESTTHAT"</span><span class="op">]</span></span>
+<span id="cb8-5"><a href=""></a><span class="dt">ignore</span> <span class="op">=</span> <span class="op">[</span><span class="st">"implicit_assignment"</span><span class="op">,</span> <span class="st">"numeric_leading_zero"</span><span class="op">]</span></span>
+<span id="cb8-6"><a href=""></a></span>
+<span id="cb8-7"><a href=""></a><span class="co"># rule-specific options</span></span>
+<span id="cb8-8"><a href=""></a><span class="kw">[lint.assignment]</span></span>
+<span id="cb8-9"><a href=""></a><span class="dt">operator</span> <span class="op">=</span> <span class="st">"="</span></span>
+<span id="cb8-10"><a href=""></a></span>
+<span id="cb8-11"><a href=""></a><span class="kw">[lint.unreachable_code]</span></span>
+<span id="cb8-12"><a href=""></a><span class="dt">extend-stopping-functions</span> <span class="op">=</span> <span class="op">[</span><span class="st">"my_custom_stop"</span><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
-<p><br></p>
-<p>Some arguments are identical to <code>air.toml</code>, e.g.&nbsp;<code>default-exclude</code>.</p>
-<p><br></p>
 <p>CLI arguments always override <code>jarl.toml</code> arguments.</p>
 </div>
 </section></section>
 <section>
-<section id="how-to-extend" class="title-slide slide level1 center">
-<h1>3. How to extend</h1>
+<section id="how-to-contribute" class="title-slide slide level1 center">
+<h1>3. How to contribute</h1>
 
 </section>
-<section id="how-to-extend-1" class="slide level2">
-<h2>3. How to extend</h2>
+<section id="how-to-contribute-1" class="slide level2">
+<h2>3. How to contribute</h2>
 <p><br></p>
 <p>Requirements to add rules:</p>
 <ul>
-<li><p>need knowledge of Rust</p></li>
-<li><p>need basic knowledge of <code>tree-sitter</code> Abstract Syntax Tree (AST)</p></li>
+<li><p>need some knowledge of Rust</p></li>
+<li><p>need basic knowledge of Abstract Syntax Trees (AST)</p></li>
 <li><p>no plugin mechanism, changes must be integrated in Jarl directly.</p></li>
 </ul>
 <div class="fragment">
 <p><br></p>
-<div id="note-rust">
-<div id="note-rust" class="callout callout-note callout-style-simple">
+<div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
+<div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
 <p>I’m not a Rust expert, other code improvements are also welcome!</p>
@@ -368,76 +467,36 @@
 </div>
 </div>
 </div>
-</div>
-<div class="fragment">
-<p><br></p>
-<p>Main limitations (for now):</p>
-<ol type="1">
-<li><p>No code flow analysis</p></li>
-<li><p>No access to the R environment</p></li>
-</ol>
-</div>
 </section>
-<section id="how-to-extend-2" class="slide level2">
-<h2>3. How to extend</h2>
+<section id="how-to-contribute-2" class="slide level2">
+<h2>3. How to contribute</h2>
 <p><br></p>
-<ol type="1">
-<li>No code flow analysis</li>
-</ol>
-<p><br></p>
-<p>Jarl can only do pattern detection.</p>
-<div class="fragment">
-<p>For example, detecting unreachable code is not possible:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>foo <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb5-2"><a href=""></a>    <span class="cf">if</span> (x <span class="sc">&gt;</span> <span class="dv">10</span>) {</span>
-<span id="cb5-3"><a href=""></a>        <span class="fu">return</span>(<span class="st">"hi"</span>)</span>
-<span id="cb5-4"><a href=""></a>    } <span class="cf">else</span> {</span>
-<span id="cb5-5"><a href=""></a>        <span class="fu">return</span>(<span class="st">"bye"</span>)</span>
-<span id="cb5-6"><a href=""></a>    }</span>
-<span id="cb5-7"><a href=""></a>    x <span class="sc">+</span> <span class="dv">1</span> <span class="co"># unreachable</span></span>
-<span id="cb5-8"><a href=""></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="how-to-extend-3" class="slide level2">
-<h2>3. How to extend</h2>
-<p><br></p>
-<ol start="2" type="1">
-<li>No access to the R environment</li>
-</ol>
-<p><br></p>
-<ul>
-<li>Don’t know from which package the function comes.</li>
-</ul>
-<div class="fragment">
-<ul>
-<li><p>Sometimes okay, e.g.&nbsp;<code>testthat</code>:</p>
-<ul>
-<li>quite distinct prefix (<code>expect_</code>)</li>
-<li>partially overlapping namespace with <code>tinytest</code> but we don’t use both at the same time</li>
-</ul></li>
-</ul>
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i class="fa-solid fa-arrow-right" aria-label="arrow-right"></i> &nbsp; can let the user opt in the rule group <code>TESTTHAT</code></p>
-</div>
-<div class="fragment">
-<ul>
-<li>Some packages have more generic function names and could be more problematic.</li>
-</ul>
-</div>
-</section>
-<section id="some-resources" class="slide level2">
-<h2>Some resources</h2>
-<p><br></p>
-<p>Some <code>testthat</code> rules to implement:</p>
-<p><a href="https://github.com/etiennebacher/jarl/issues/214" target="_blank">https://github.com/etiennebacher/jarl/issues/214</a></p>
+<p>General contributing guide:</p>
+<p><a href="https://jarl.etiennebacher.com/contributing" target="_blank">https://jarl.etiennebacher.com/contributing</a></p>
 <p><br></p>
 <p>Tutorial on contributing a rule:</p>
 <p><a href="https://jarl.etiennebacher.com/contributing-rule-example" target="_blank">https://jarl.etiennebacher.com/contributing-rule-example</a></p>
+</section>
+<section id="what-to-contribute" class="slide level2">
+<h2>3. What to contribute?</h2>
+<p><br> <br></p>
+<p><a href="https://github.com/etiennebacher/jarl/issues/214">Some <code>testthat</code> rules to implement</a></p>
 <p><br></p>
-<p>Example PR:</p>
-<p><a href="https://github.com/etiennebacher/jarl/pull/225" target="_blank">https://github.com/etiennebacher/jarl/pull/225</a></p>
+<p><a href="https://github.com/etiennebacher/jarl/issues/8">Improve the coverage of <code>lintr</code> rules</a></p>
 <p><br></p>
-<p>Full docs:</p>
-<p><a href="https://jarl.etiennebacher.com/" target="_blank">https://jarl.etiennebacher.com/</a></p>
+<p>Discuss <a href="https://github.com/etiennebacher/jarl/issues?q=sort%3Aupdated-desc+is%3Aissue+state%3Aopen+label%3Anew-rule">existing suggestions</a>, or propose <a href="https://github.com/etiennebacher/jarl/issues/new?template=feature--new-rule.md">your own rule</a>!</p>
+</section></section>
+<section>
+<section id="conclusion" class="title-slide slide level1 center">
+<h1>Conclusion</h1>
+
+</section>
+<section id="conclusion-1" class="slide level2">
+<h2>Conclusion</h2>
+<p><br> <br></p>
+<p>You can install and run Jarl in three seconds (literally), give it a try!</p>
+<p><br></p>
+<p>Full docs: <a href="https://jarl.etiennebacher.com/" target="_blank">jarl.etiennebacher.com</a></p>
 
 </section></section>
     </div>

@@ -7,7 +7,7 @@ format:
    theme: [serif, custom.scss]
    pdf-separate-fragments: true
    strip-comments: true
-   highlight-style: github
+   highlight-style: atom-one
    auto-animate-duration: 0.8
    code-copy: true
    slide-number: true
@@ -19,49 +19,101 @@ execute:
 
 ## A linter?
 
-<br>
+::: notes
+Show of hands: who here:
 
-Find code that is not optimal, likely wrong, hard to read, etc.
+- knows what a linter is?
+
+- regularly uses a linter?
+
+- has ever used a linter in R?
+:::
 
 . . .
 
 <br>
 
+Tool to find code that is not optimal, likely wrong, hard to read, etc. by performing **static analysis**.
+
+<br>
+
+. . .
+
+Most languages have at least one linter.
+
+<br>
+
+. . .
+
+A linter is **opinionated**.
+
+## What do you mean *opinionated*?
+
+<br>
+
+```r
+x = y * .52
+if (all.equal(x, z)) {
+  print("x and z are equal")
+}
+```
+
+. . .
+
+
+All possible violations:
+
+1. `x = y * .52`
+
+    a. **not important**: use `<-` instead of `=`
+
+    b. **not important**: use `0.52` instead of `.52`
+
+2. **important**: `all.equal(x, z)` doesn't return `FALSE` if `x != z`
+
+
+## Current status
+
+<br>
+
 So far in R: **`lintr`**
 
-- 117 rules (formatting + linting), e.g. `any(is.na(x))` -> `anyNA(x)` 
+- pioneer for linting in R
+- 117 rules (formatting + linting), e.g. `any(is.na(x))` -> `anyNA(x)`
+
+. . .
+
+**But**:
+
 - reports lints, does not fix them
 - can be slow
 - requires an R setup
 
-##
-
-<br><br>
-
-{{< fa arrow-right >}} &nbsp; **`Jarl`**
-
-- ~ 40 rules (linting only)
-- fast (uses Air infrastructure)
-- automatic fixes when possible
-- single binary to run
+## Introducing Jarl
 
 <br>
 
-Full docs: [jarl.etiennebacher.com](https://jarl.etiennebacher.com/)
+- Released in November 2025
+- ~ 85 rules (linting only)
+- fast (written in Rust)
+- automatic fixes when possible
+- single binary to run
+- editor integration
+
 
 ## Plan
 
-<br><br>
+<br>
 
 1. How to use
 
-<br><br>
+<br>
 
 2. How to configure
 
-<br><br>
+<br>
 
-3. How to extend
+3. How to contribute
 
 # 1. How to use
 
@@ -69,52 +121,111 @@ Full docs: [jarl.etiennebacher.com](https://jarl.etiennebacher.com/)
 
 <br>
 
-Three options:
+Three ways to use Jarl:
 
-- in terminal:
+1. in terminal
+1. with extensions in your editor
+1. in CI
+
+## 1. How to use in terminal
+
+<br>
+Basic usage:
 
 ```sh
 # Run linter on current directory
 jarl check .
+```
+<br>
 
-# Run linter and apply automatic fixes
+. . .
+
+Recommended usage: run this first
+
+```sh
+jarl check . --statistics
+```
+
+and then proceed rule by rule (and possibly tweak the configuration).
+
+## 1. How to use in terminal
+
+<br>
+
+Rules can come with safe fixes, unsafe fixes, or no fixes at all:
+
+```sh
+# Apply safe fixes only
 jarl check . --fix
+
+# Apply safe and unsafe fixes
+jarl check . --fix --unsafe-fixes
 ```
 
 . . .
 
-- with extensions (Positron, Zed, VS Code, Neovim, Helix): code highlighting and code-actions
+::: {.callout-note}
+By default, fixes are not applied if:
 
-. . .
+1. the project doesn't use version control
+1. or the version control status is "dirty" (some files are unstaged)
 
-- in CI: Github actions workflow [setup-jarl](https://github.com/etiennebacher/setup-jarl)
-
-## 1. How to use
-
-<img src="./screenshot_ci.png" width="700" height="200">
-
-:::{#yaml-ci}
-```yaml
-# Workflow derived from https://github.com/posit-dev/setup-air/tree/main/examples
-
-on:
-  push:
-    branches: main
-  pull_request:
-
-name: Lint
-
-permissions: read-all
-
-jobs:
-  jarl-check:
-    name: jarl-check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: etiennebacher/setup-jarl@v0.1.0
-```
+Use `--allow-no-vcs` and `--allow-dirty` carefully!
 :::
+
+
+
+## 1. How to use with extensions
+
+<br>
+<br>
+
+Install the "Jarl" extension in your editor (Positron, Zed, VS Code, Neovim, Helix, etc.). **RStudio integration is not possible.**
+
+<br>
+
+Using the extension enables code highlighting and code actions.
+
+## 1. How to use in CI
+
+<br>
+
+Use the GitHub actions workflow: [setup-jarl](https://github.com/etiennebacher/setup-jarl)
+
+<img src="./screenshot_ci.png" width="900" height="250">
+
+
+## Silencing Jarl
+
+<br>
+
+. . .
+
+For the occasional false positive, use **suppression comments**:
+
+```r
+# jarl-ignore <rule name>: <reason for skipping>
+```
+
+. . .
+
+<div style="height: 0.5em"></div>
+
+```r
+# jarl-ignore any_is_na: this is a demo
+any(is.na(x))
+
+# jarl-ignore-start any_is_na: this is a demo
+...
+any(is.na(x))
+...
+# jarl-ignore-end any_is_na
+```
+
+. . .
+
+For more important changes to Jarl's output, you will need to **configure** Jarl.
+
 
 # 2. How to configure
 
@@ -123,7 +234,6 @@ jobs:
 <br>
 
 **With CLI arguments** (temporary)
-<br>
 <br>
 
 ```sh
@@ -145,40 +255,38 @@ jarl check --help
 
 **With `jarl.toml`** (permanent)
 <br>
-<br>
-
-Most CLI args have an equivalent in `jarl.toml`:
-<br>
 
 ```{.toml filename="jarl.toml"}
 [lint]
+
+# general options
 extend-select = ["TESTTHAT"]
 ignore = ["implicit_assignment", "numeric_leading_zero"]
-assignment = "="
+
+# rule-specific options
+[lint.assignment]
+operator = "="
+
+[lint.unreachable_code]
+extend-stopping-functions = ["my_custom_stop"]
 ```
 
 . . .
 
-<br>
-
-Some arguments are identical to `air.toml`, e.g. `default-exclude`.
-
-<br>
-
 CLI arguments always override `jarl.toml` arguments.
 
 
-# 3. How to extend
+# 3. How to contribute
 
-## 3. How to extend
+## 3. How to contribute
 
 <br>
 
 Requirements to add rules:
 
-- need knowledge of Rust
+- need some knowledge of Rust
 
-- need basic knowledge of `tree-sitter` Abstract Syntax Tree (AST)
+- need basic knowledge of Abstract Syntax Trees (AST)
 
 - no plugin mechanism, changes must be integrated in Jarl directly.
 
@@ -186,76 +294,17 @@ Requirements to add rules:
 
 <br>
 
-:::{.callout-note #note-rust appearance="simple"}
+:::{.callout-note}
 I'm not a Rust expert, other code improvements are also welcome!
 :::
 
-. . .
+## 3. How to contribute
 
 <br>
 
-Main limitations (for now):
+General contributing guide:
 
-1. No code flow analysis
-
-2. No access to the R environment
-
-## 3. How to extend
-
-<br>
-
-1. No code flow analysis
-
-<br>
-
-Jarl can only do pattern detection.
-
-. . .
-
-For example, detecting unreachable code is not possible:
-
-```r
-foo <- function(x) {
-    if (x > 10) {
-        return("hi")
-    } else {
-        return("bye")
-    }
-    x + 1 # unreachable
-}
-```
-
-## 3. How to extend
-
-<br>
-
-2. No access to the R environment
-
-<br>
-
-* Don't know from which package the function comes.
-
-. . .
-
-* Sometimes okay, e.g. `testthat`:
-
-    - quite distinct prefix (`expect_`)
-    - partially overlapping namespace with `tinytest` but we don't use both at the same time
-
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{< fa arrow-right >}} &nbsp; can let the user opt in the rule group `TESTTHAT`
-
-. . .
-
-* Some packages have more generic function names and could be more problematic.
-
-
-## Some resources
-
-<br>
-
-Some `testthat` rules to implement:
-
-[https://github.com/etiennebacher/jarl/issues/214](https://github.com/etiennebacher/jarl/issues/214){target="_blank"}
+[https://jarl.etiennebacher.com/contributing](https://jarl.etiennebacher.com/contributing){target="_blank"}
 
 <br>
 
@@ -263,14 +312,31 @@ Tutorial on contributing a rule:
 
 [https://jarl.etiennebacher.com/contributing-rule-example](https://jarl.etiennebacher.com/contributing-rule-example){target="_blank"}
 
-<br>
-
-Example PR:
-
-[https://github.com/etiennebacher/jarl/pull/225](https://github.com/etiennebacher/jarl/pull/225){target="_blank"}
+## 3. What to contribute?
 
 <br>
+<br>
 
-Full docs:
+[Some `testthat` rules to implement](https://github.com/etiennebacher/jarl/issues/214)
 
-[https://jarl.etiennebacher.com/](https://jarl.etiennebacher.com/){target="_blank"}
+<br>
+
+[Improve the coverage of `lintr` rules](https://github.com/etiennebacher/jarl/issues/8)
+
+<br>
+
+Discuss [existing suggestions](https://github.com/etiennebacher/jarl/issues?q=sort%3Aupdated-desc+is%3Aissue+state%3Aopen+label%3Anew-rule), or propose [your own rule](https://github.com/etiennebacher/jarl/issues/new?template=feature--new-rule.md)!
+
+
+# Conclusion
+
+## Conclusion
+
+<br>
+<br>
+
+You can install and run Jarl in three seconds (literally), give it a try!
+
+<br>
+
+Full docs: [jarl.etiennebacher.com](https://jarl.etiennebacher.com/){target="_blank"}
