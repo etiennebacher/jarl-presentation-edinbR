@@ -65,13 +65,13 @@ if (all.equal(x, z)) {
 
 All possible violations:
 
-1. `x = y * .52`
+* `x = y * .52`
 
-    a. **not important**: use `<-` instead of `=`
+    * **not important**: use `<-` instead of `=`
 
-    b. **not important**: use `0.52` instead of `.52`
+    * **not important**: use `0.52` instead of `.52`
 
-2. **important**: `all.equal(x, z)` doesn't return `FALSE` if `x != z`
+* **important**: `all.equal(x, z)` doesn't return `FALSE` if `x != z`
 
 :::
 

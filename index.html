@@ -243,14 +243,14 @@
 <span id="cb1-4"><a href=""></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p>All possible violations:</p>
-<ol type="1">
+<ul>
 <li class="fragment"><p><code>x = y * .52</code></p>
-<ol type="a">
+<ul>
 <li class="fragment"><p><strong>not important</strong>: use <code>&lt;-</code> instead of <code>=</code></p></li>
 <li class="fragment"><p><strong>not important</strong>: use <code>0.52</code> instead of <code>.52</code></p></li>
-</ol></li>
+</ul></li>
 <li class="fragment"><p><strong>important</strong>: <code>all.equal(x, z)</code> doesn’t return <code>FALSE</code> if <code>x != z</code></p></li>
-</ol>
+</ul>
 </div>
 </section>
 <section id="current-status" class="slide level2">
