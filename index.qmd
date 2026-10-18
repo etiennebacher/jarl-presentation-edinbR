@@ -61,6 +61,8 @@ if (all.equal(x, z)) {
 . . .
 
 
+::: {.incremental}
+
 All possible violations:
 
 1. `x = y * .52`
@@ -71,6 +73,7 @@ All possible violations:
 
 2. **important**: `all.equal(x, z)` doesn't return `FALSE` if `x != z`
 
+:::
 
 ## Current status
 
