@@ -6,8 +6,8 @@
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-93d1fc2728cb29a625c739abeb3d66e8.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.27">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-eec68b17241c1efd3eae2de50d816e3e.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <title>Jarl, a new R linter</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -19,10 +19,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -223,7 +226,9 @@
       }</style></aside>
 <div class="fragment">
 <p><br></p>
-<p>Tool to find code that is not optimal, likely wrong, hard to read, etc. by performing <strong>static analysis</strong>.</p>
+<p>Tool to find code that is not optimal, likely wrong, hard to read, etc.</p>
+<p><br></p>
+<p>It performs <strong>static analysis</strong>.</p>
 <p><br></p>
 </div>
 <div class="fragment">
@@ -237,10 +242,10 @@
 <section id="what-do-you-mean-opinionated" class="slide level2">
 <h2>What do you mean <em>opinionated</em>?</h2>
 <p><br></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>x <span class="ot">=</span> y <span class="sc">*</span> .<span class="dv">52</span></span>
-<span id="cb1-2"><a href=""></a><span class="cf">if</span> (<span class="fu">all.equal</span>(x, z)) {</span>
-<span id="cb1-3"><a href=""></a>  <span class="fu">print</span>(<span class="st">"x and z are equal"</span>)</span>
-<span id="cb1-4"><a href=""></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-label="1"></a>x <span class="ot">=</span> y <span class="sc">*</span> .<span class="dv">52</span></span>
+<span id="cb1-2"><a href="" aria-label="2"></a><span class="cf">if</span> (<span class="fu">all.equal</span>(x, z)) {</span>
+<span id="cb1-3"><a href="" aria-label="3"></a>  <span class="fu">print</span>(<span class="st">"x and z are equal"</span>)</span>
+<span id="cb1-4"><a href="" aria-label="4"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p>All possible violations:</p>
 <ul>
@@ -315,12 +320,12 @@
 <section id="how-to-use-in-terminal" class="slide level2">
 <h2>1. How to use in terminal</h2>
 <p><br> Basic usage:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href=""></a><span class="co"># Run linter on current directory</span></span>
-<span id="cb2-2"><a href=""></a><span class="ex">jarl</span> check .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="" aria-label="1"></a><span class="co"># Run linter on current directory</span></span>
+<span id="cb2-2"><a href="" aria-label="2"></a><span class="ex">jarl</span> check .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><br></p>
 <div class="fragment">
 <p>Recommended usage: run this first</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href=""></a><span class="ex">jarl</span> check . <span class="at">--statistics</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="" aria-label="1"></a><span class="ex">jarl</span> check . <span class="at">--statistics</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>and then proceed rule by rule (and possibly tweak the configuration).</p>
 </div>
 </section>
@@ -328,11 +333,11 @@
 <h2>1. How to use in terminal</h2>
 <p><br></p>
 <p>Rules can come with safe fixes, unsafe fixes, or no fixes at all:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href=""></a><span class="co"># Apply safe fixes only</span></span>
-<span id="cb4-2"><a href=""></a><span class="ex">jarl</span> check . <span class="at">--fix</span></span>
-<span id="cb4-3"><a href=""></a></span>
-<span id="cb4-4"><a href=""></a><span class="co"># Apply safe and unsafe fixes</span></span>
-<span id="cb4-5"><a href=""></a><span class="ex">jarl</span> check . <span class="at">--fix</span> <span class="at">--unsafe-fixes</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="" aria-label="1"></a><span class="co"># Apply safe fixes only</span></span>
+<span id="cb4-2"><a href="" aria-label="2"></a><span class="ex">jarl</span> check . <span class="at">--fix</span></span>
+<span id="cb4-3"><a href="" aria-label="3"></a></span>
+<span id="cb4-4"><a href="" aria-label="4"></a><span class="co"># Apply safe and unsafe fixes</span></span>
+<span id="cb4-5"><a href="" aria-label="5"></a><span class="ex">jarl</span> check . <span class="at">--fix</span> <span class="at">--unsafe-fixes</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -372,20 +377,20 @@
 <p><br></p>
 <div class="fragment">
 <p>For the occasional false positive, use <strong>suppression comments</strong>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co"># jarl-ignore &lt;rule name&gt;: &lt;reason for skipping&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-label="1"></a><span class="co"># jarl-ignore &lt;rule name&gt;: &lt;reason for skipping&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <div style="height: 0.5em">
 
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="co"># jarl-ignore any_is_na: this is a demo</span></span>
-<span id="cb6-2"><a href=""></a><span class="fu">any</span>(<span class="fu">is.na</span>(x))</span>
-<span id="cb6-3"><a href=""></a></span>
-<span id="cb6-4"><a href=""></a><span class="co"># jarl-ignore-start any_is_na: this is a demo</span></span>
-<span id="cb6-5"><a href=""></a>...</span>
-<span id="cb6-6"><a href=""></a><span class="fu">any</span>(<span class="fu">is.na</span>(x))</span>
-<span id="cb6-7"><a href=""></a>...</span>
-<span id="cb6-8"><a href=""></a><span class="co"># jarl-ignore-end any_is_na</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-label="1"></a><span class="co"># jarl-ignore any_is_na: this is a demo</span></span>
+<span id="cb6-2"><a href="" aria-label="2"></a><span class="fu">any</span>(<span class="fu">is.na</span>(x))</span>
+<span id="cb6-3"><a href="" aria-label="3"></a></span>
+<span id="cb6-4"><a href="" aria-label="4"></a><span class="co"># jarl-ignore-start any_is_na: this is a demo</span></span>
+<span id="cb6-5"><a href="" aria-label="5"></a>...</span>
+<span id="cb6-6"><a href="" aria-label="6"></a><span class="fu">any</span>(<span class="fu">is.na</span>(x))</span>
+<span id="cb6-7"><a href="" aria-label="7"></a>...</span>
+<span id="cb6-8"><a href="" aria-label="8"></a><span class="co"># jarl-ignore-end any_is_na</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p>For more important changes to Jarl’s output, you will need to <strong>configure</strong> Jarl.</p>
@@ -400,17 +405,17 @@
 <h2>2. How to configure</h2>
 <p><br></p>
 <p><strong>With CLI arguments</strong> (temporary) <br></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="co"># Use the rules "any_is_na" and "any_duplicated" only</span></span>
-<span id="cb7-2"><a href=""></a><span class="ex">jarl</span> check . <span class="at">--select</span> any_is_na,any_duplicated</span>
-<span id="cb7-3"><a href=""></a></span>
-<span id="cb7-4"><a href=""></a><span class="co"># Use all default rules + testthat rules except "expect_named"</span></span>
-<span id="cb7-5"><a href=""></a><span class="ex">jarl</span> check . <span class="at">--extend-select</span> TESTTHAT <span class="at">--ignore</span> expect_named</span>
-<span id="cb7-6"><a href=""></a></span>
-<span id="cb7-7"><a href=""></a><span class="co"># Get a more concise version of rule violations</span></span>
-<span id="cb7-8"><a href=""></a><span class="ex">jarl</span> check . <span class="at">--output-format</span> concise</span>
-<span id="cb7-9"><a href=""></a></span>
-<span id="cb7-10"><a href=""></a><span class="co"># All commands</span></span>
-<span id="cb7-11"><a href=""></a><span class="ex">jarl</span> check <span class="at">--help</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sh number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="" aria-label="1"></a><span class="co"># Use the rules "any_is_na" and "any_duplicated" only</span></span>
+<span id="cb7-2"><a href="" aria-label="2"></a><span class="ex">jarl</span> check . <span class="at">--select</span> any_is_na,any_duplicated</span>
+<span id="cb7-3"><a href="" aria-label="3"></a></span>
+<span id="cb7-4"><a href="" aria-label="4"></a><span class="co"># Use all default rules + testthat rules except "expect_named"</span></span>
+<span id="cb7-5"><a href="" aria-label="5"></a><span class="ex">jarl</span> check . <span class="at">--extend-select</span> TESTTHAT <span class="at">--ignore</span> expect_named</span>
+<span id="cb7-6"><a href="" aria-label="6"></a></span>
+<span id="cb7-7"><a href="" aria-label="7"></a><span class="co"># Get a more concise version of rule violations</span></span>
+<span id="cb7-8"><a href="" aria-label="8"></a><span class="ex">jarl</span> check . <span class="at">--output-format</span> concise</span>
+<span id="cb7-9"><a href="" aria-label="9"></a></span>
+<span id="cb7-10"><a href="" aria-label="10"></a><span class="co"># All commands</span></span>
+<span id="cb7-11"><a href="" aria-label="11"></a><span class="ex">jarl</span> check <span class="at">--help</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="how-to-configure-2" class="slide level2">
 <h2>2. How to configure</h2>
@@ -420,18 +425,18 @@
 <div class="code-with-filename-file">
 <pre><strong>jarl.toml</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-filename="jarl.toml"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb8-1"><a href=""></a><span class="kw">[lint]</span></span>
-<span id="cb8-2"><a href=""></a></span>
-<span id="cb8-3"><a href=""></a><span class="co"># general options</span></span>
-<span id="cb8-4"><a href=""></a><span class="dt">extend-select</span> <span class="op">=</span> <span class="op">[</span><span class="st">"TESTTHAT"</span><span class="op">]</span></span>
-<span id="cb8-5"><a href=""></a><span class="dt">ignore</span> <span class="op">=</span> <span class="op">[</span><span class="st">"implicit_assignment"</span><span class="op">,</span> <span class="st">"numeric_leading_zero"</span><span class="op">]</span></span>
-<span id="cb8-6"><a href=""></a></span>
-<span id="cb8-7"><a href=""></a><span class="co"># rule-specific options</span></span>
-<span id="cb8-8"><a href=""></a><span class="kw">[lint.assignment]</span></span>
-<span id="cb8-9"><a href=""></a><span class="dt">operator</span> <span class="op">=</span> <span class="st">"="</span></span>
-<span id="cb8-10"><a href=""></a></span>
-<span id="cb8-11"><a href=""></a><span class="kw">[lint.unreachable_code]</span></span>
-<span id="cb8-12"><a href=""></a><span class="dt">extend-stopping-functions</span> <span class="op">=</span> <span class="op">[</span><span class="st">"my_custom_stop"</span><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8" data-filename="jarl.toml"><pre class="sourceCode numberSource toml number-lines code-with-copy"><code class="sourceCode toml"><span id="cb8-1"><a href="" aria-label="1"></a><span class="kw">[lint]</span></span>
+<span id="cb8-2"><a href="" aria-label="2"></a></span>
+<span id="cb8-3"><a href="" aria-label="3"></a><span class="co"># general options</span></span>
+<span id="cb8-4"><a href="" aria-label="4"></a><span class="dt">extend-select</span> <span class="op">=</span> <span class="op">[</span><span class="st">"TESTTHAT"</span><span class="op">]</span></span>
+<span id="cb8-5"><a href="" aria-label="5"></a><span class="dt">ignore</span> <span class="op">=</span> <span class="op">[</span><span class="st">"implicit_assignment"</span><span class="op">,</span> <span class="st">"numeric_leading_zero"</span><span class="op">]</span></span>
+<span id="cb8-6"><a href="" aria-label="6"></a></span>
+<span id="cb8-7"><a href="" aria-label="7"></a><span class="co"># rule-specific options</span></span>
+<span id="cb8-8"><a href="" aria-label="8"></a><span class="kw">[lint.assignment]</span></span>
+<span id="cb8-9"><a href="" aria-label="9"></a><span class="dt">operator</span> <span class="op">=</span> <span class="st">"="</span></span>
+<span id="cb8-10"><a href="" aria-label="10"></a></span>
+<span id="cb8-11"><a href="" aria-label="11"></a><span class="kw">[lint.unreachable_code]</span></span>
+<span id="cb8-12"><a href="" aria-label="12"></a><span class="dt">extend-stopping-functions</span> <span class="op">=</span> <span class="op">[</span><span class="st">"my_custom_stop"</span><span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p>CLI arguments always override <code>jarl.toml</code> arguments.</p>

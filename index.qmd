@@ -33,7 +33,11 @@ Show of hands: who here:
 
 <br>
 
-Tool to find code that is not optimal, likely wrong, hard to read, etc. by performing **static analysis**.
+Tool to find code that is not optimal, likely wrong, hard to read, etc. 
+
+<br>
+
+It performs **static analysis**.
 
 <br>
 
